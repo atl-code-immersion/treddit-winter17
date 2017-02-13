@@ -1,0 +1,30 @@
+<div class="row">
+	<% @posts.each do |post| %>
+		<div class="col-md-1">
+			<p>
+				<%= link_to upvote_path(id: post.id) do %>
+					<i class="fa fa-thumbs-o-up"></i>
+				<% end %>
+			</p>
+			<p>
+				<%= post.score %>
+			</p>
+			<p>
+				<%= link_to downvote_path(id: post.id) do %>
+					<i class="fa fa-thumbs-o-down"></i>
+				<% end %>
+			</p>
+		</div>
+		<div class="col-md-11">
+			<p>
+				<%= link_to post.caption, post.link, target: "_blank" %>
+			</p>
+			<p>
+				submitted <%= time_ago_in_words post.created_at %> ago by <%= link_to post.user.username, user_posts_path(id: post.user_id) %>
+			</p>
+			<p>
+				<%= link_to "#{post.comments.length} Comments", show_post_path(id: post.id) %>
+			</p>
+		</div>
+	<% end %>
+</div>
